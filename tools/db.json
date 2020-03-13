@@ -1,0 +1,110 @@
+{
+  "xml_list": [
+    {
+      "id": "DTH_INST.txt",
+      "name": "Instalação DTH"
+    },
+    {
+      "id": "DTH_MIG.txt",
+      "name": "Migração DTH"
+    },
+    {
+      "id": "DTH_MUD.txt",
+      "name": "Mudança DTH"
+    },
+    {
+      "id": "DTH_REP.txt",
+      "name": "Reparo DTH"
+    },
+    {
+      "id": "DTH_RET.txt",
+      "name": "Retirada DTH"
+    },
+    {
+      "id": "DTH_SRV.txt",
+      "name": "Serviço DTH"
+    },
+    {
+      "id": "VLX_INST.txt",
+      "name": "Instalação Velox"
+    },
+    {
+      "id": "VLX_MUD.txt",
+      "name": "Mudança Velox"
+    },
+    {
+      "id": "VOZ_INST.txt",
+      "name": "Instalação Voz"
+    }
+  ],
+  "create": [
+    {
+      "id": 1,
+      "code": 200,
+      "data": {
+        "success": true,
+        "workOrderId": 144098100403722
+      }
+    },
+    {
+      "associatedDocument": "321",
+      "customerContact": "123",
+      "type": "Migração DTH",
+      "createdAt": 1584070082922,
+      "id": 2
+    },
+    {
+      "associatedDocument": "321",
+      "customerContact": "123",
+      "type": "Instalação DTH",
+      "createdAt": 1584070195463,
+      "id": 3
+    },
+    {
+      "associatedDocument": "321",
+      "customerContact": "123",
+      "type": "Instalação DTH",
+      "createdAt": 1584070203500,
+      "id": 4
+    }
+  ],
+  "all": [
+    {
+      "id": 1,
+      "success": true,
+      "workOrderId": "workOrderId",
+      "technicianId": "technicianId"
+    }
+  ],
+  "assign": [
+    {
+      "id": 1,
+      "code": 200,
+      "data": {
+        "success": true,
+        "workOrderId": "144098100403722",
+        "technicianId": "TR637384"
+      }
+    }
+  ],
+  "changeStatus": [
+    {
+      "id": 1,
+      "code": 200,
+      "data": {
+        "success": true,
+        "workOrderId": "144098100403722",
+        "technicianId": "TR637384"
+      }
+    }
+  ],
+  "singleInstall": [
+    {
+      "id": 1,
+      "success": true,
+      "workOrderIdVoz": "",
+      "workOrderIdVlx": "",
+      "technicianId": ""
+    }
+  ]
+}
