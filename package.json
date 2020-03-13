@@ -2,6 +2,7 @@
   "name": "click-front-form",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
@@ -26,8 +27,8 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "run-p start:dev start:api",
-    "start:dev": "react-scripts start",
+    "start:mocked": "run-p start:dev start:api",
+    "start:dev": "PORT=3006 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

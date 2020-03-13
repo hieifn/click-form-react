@@ -13,16 +13,30 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
     const [modalShow, setModalShow] = useState(false);
     const [response, setResponse] = useState('');
 
+    const convertBackToId = (paramElement, paramList) => {
+        return paramList.filter((listElement) => listElement.name === paramElement.value)[0].id;
+    };
+
     // reducing array to single request obj
     const buildRequest = (paramList) => {
-        return paramList.reduce((accValue, currValue) => ({...accValue,  ...{[currValue.label]: currValue.value}}), {})
+        const newParamList = paramList.map((element) => element.label === 'type' ? 
+            {
+                "label":element.label,
+                "value": convertBackToId(element, list)
+            } 
+                : 
+            element);
+            
+        return newParamList.reduce((accValue, currValue) => ({...accValue,  ...{[currValue.label]: currValue.value}}), {})
     }
 
     const handleSubmit = event => {
         event.preventDefault();
         event.stopPropagation();
+        
         const form = event.currentTarget;
         const listObjValues = mapInputs[type].map((element) => ({ label:element.name, value: document.getElementById(`${element.name}-${type}`).value}))
+        
         if (form.checkValidity()) {    
             let request = buildRequest(listObjValues);
             ClickApi.clickRequests(request, type)

@@ -10,7 +10,7 @@ const TabContent = props => {
 
     useEffect(()=>{
         XmlApi.getXmls()
-            .then((xml)=> setList(xml))
+            .then((xmlResponse) => setList(xmlResponse.data.xmls))
             .catch((e) => console.log('deu ruim!>', e))
     },[])
 

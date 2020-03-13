@@ -49,23 +49,16 @@
     {
       "associatedDocument": "321",
       "customerContact": "123",
-      "type": "Migração DTH",
-      "createdAt": 1584070082922,
+      "type": "Instalação DTH",
+      "createdAt": 1584111380061,
       "id": 2
     },
     {
       "associatedDocument": "321",
       "customerContact": "123",
       "type": "Instalação DTH",
-      "createdAt": 1584070195463,
+      "createdAt": 1584111431516,
       "id": 3
-    },
-    {
-      "associatedDocument": "321",
-      "customerContact": "123",
-      "type": "Instalação DTH",
-      "createdAt": 1584070203500,
-      "id": 4
     }
   ],
   "all": [
