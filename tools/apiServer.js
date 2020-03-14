@@ -44,26 +44,28 @@ server.use((req, res, next) => {
   next();
 });
 
-// server.post("/create/", function(req, res, next) {
-  
-//   console.log(req, res);
-  
-//   // const error = validateCourse(req.body);
-//   // if (error) {
-//   //   res.status(400).send(error);
-//   // } else {
-//   //   req.body.slug = createSlug(req.body.title); // Generate a slug for new courses.
-//   //   next();
-//   // }
-//   // console.log(req.body)
-//   // next();
-// });
+const data = {
+  xmls:[{ id: 'DTH_INST.txt', name: 'Instalação DTH' }, 
+    { id: 'DTH_MIG.txt', name: 'Migração DTH' }, 
+    { id: 'DTH_MUD.txt', name: 'Mudança DTH' }, 
+    { id: 'DTH_REP.txt', name: 'Reparo DTH' }, 
+    { id: 'DTH_RET.txt', name: 'Retirada DTH' }, 
+    { id: 'DTH_SRV.txt', name: 'Serviço DTH' }, 
+    { id: 'VLX_INST.txt', name: 'Instalação Velox' }, 
+    { id: 'VLX_MUD.txt', name: 'Mudança Velox' }, 
+    { id: 'VOZ_INST.txt', name: 'Instalação Voz' }
+  ]};
+
+server.post("/getBaXmls/", function(req, res, next) {
+  req.body.data = data;
+  next();
+});
 
 // Use default router
 server.use(router);
 
 // Start server
-const port = 3001;
+const port = 3000;
 server.listen(port, () => {
   console.log(`JSON Server is running on port ${port}`);
 });
