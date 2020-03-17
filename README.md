@@ -67,5 +67,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 =======
-# click-form-react
-This is a simple input in react
+### click-form-react
+
+This is a simple react form with the intent of creating a agnostic form page for other uses.
+As described above , to install and run : 
+
+#### npm install > npm start
