@@ -27,13 +27,15 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start:mocked": "run-p start:dev start:api",
+    "start": "run-p start:dev start:ngrok",
+    "start:mocked": "run-p start:dev start:api start:ngrok",
     "start:dev": "PORT=3006 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prestart:api": "node tools/createMockDb.js",
-    "start:api": "node tools/apiServer.js"
+    "start:api": "node tools/apiServer.js",
+    "start:ngrok": "./ngrok http 3006 -host-header='localhost:3006'"
   },
   "eslintConfig": {
     "extends": "react-app"
