@@ -1,3 +1,14 @@
+### Preparations `Ngrok`
+
+To run the project you will also need to download [Ngrok](https://ngrok.com/download) and put it inside the root project folder.<br />
+
+After that you can run `npm start` to start the project and to start ngrok.<br />
+
+Open [http://localhost:4040/](http://localhost:4040/) to view where you local webserver is being hosted. 
+
+It will look something like : `http://92832de0.ngrok.io`
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
