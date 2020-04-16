@@ -10,3 +10,13 @@ export function clickRequests(paramRequest, paramUrl) {
         .then(handleResponse)
         .catch(handleError);
 }
+
+export function clickRequestsFinalTest(paramRequest, paramUrl) {
+    return fetch(`/${paramUrl}/`, {
+        method: "POST", // POST for create, PUT to update when id already exists.
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(paramRequest)
+    })
+        .then(handleResponse)
+        .catch(handleError);
+}

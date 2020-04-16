@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "run-p start:dev start:ngrok",
-    "start:mocked": "run-p start:dev start:api start:ngrok",
+    "start:mocked": "run-p start:dev start:api",
     "start:dev": "PORT=3006 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

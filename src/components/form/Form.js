@@ -12,6 +12,7 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
     const [validated, setValidated] = useState(false);
     const [modalShow, setModalShow] = useState(false);
     const [response, setResponse] = useState('');
+    const [check, setCheck] = useState(false);
 
     const convertBackToId = (paramElement, paramList) => {
         return paramList.filter((listElement) => listElement.name === paramElement.value)[0].id;
@@ -36,14 +37,21 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
         
         const form = event.currentTarget;
         const listObjValues = mapInputs[type].map((element) => ({ label:element.name, value: document.getElementById(`${element.name}-${type}`).value}))
-        
+        console.log(listObjValues);
+
         if (form.checkValidity()) {    
             let request = buildRequest(listObjValues);
+            const { baNumber } = request;
+            console.log({baNumber});
             ClickApi.clickRequests(request, type)
                 .then((resp) => {
                     setResponse(JSON.stringify(resp));
                     setModalShow(true)
                     console.table(resp)
+                    if (check) {
+                        ClickApi.clickRequestsFinalTest({baNumber}, 'setInFinalTest')
+                        // new request for final Test
+                    }
                 })
                 .catch((e) => {console.log(e)});
             console.log('sucess');
@@ -55,6 +63,7 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
         }
     };
 
+    // can be putted on DB for maping and flexibility
     const mapInputs = {
         'create': [{
             name: 'associatedDocument',
@@ -125,6 +134,12 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
             icon: faUserLock,
             placeholder: "TR do Técnico",
             error: 'Fovor Inserir TR do Técnico'
+        },{
+            name: 'checkBoxTF',
+            label: 'Incluir Teste Final ?',
+            typeField: 'checkbox',
+            placeholder: "TR do Técnico",
+            error: 'Fovor Inserir TR do Técnico'
         }],
         'all':[{
             name: 'technicianId',
@@ -150,30 +165,56 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
             label: 'Tipo da BA',
             icon: faEdit,
             error: 'Fovor Inserir o Telefone'
+        },{
+            name: 'checkBoxTF',
+            label: 'Incluir Teste Final ?',
+            typeField: 'checkbox',
+            placeholder: "TR do Técnico",
+            error: 'Fovor Inserir TR do Técnico'
         }]
     }
 
     const createFormGroup = ({ name, typeField, label, icon, placeholder, error }) => {
         return (
             <Form.Group key={name} as={Col} controlId={`${name}-${type}`}>
-                <Form.Label>{label}</Form.Label>
+                {
+                    typeField === 'checkbox' ? 
+                        undefined
+                        :
+                        <Form.Label>{label}</Form.Label>
+                }
+                
                 <InputGroup>
-                    <InputGroup.Prepend>
-                        <InputGroup.Text id="inputGroupPrepend">
-                            <FontAwesomeIcon icon={icon} />
-                        </InputGroup.Text>
-                    </InputGroup.Prepend>
-                    {typeField && list ?
-                    <Form.Control as="select">
-                        {list.map((element) => (<option key={`${element.id}-${element.name}`}>{element.name}</option>))}
-                    </Form.Control>
-                        : 
-                    <Form.Control
-                        type="text"
-                        placeholder={placeholder}
-                        aria-describedby="inputGroupPrepend"
-                        required
-                    />}
+                    {
+                        icon ? 
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="inputGroupPrepend">
+                                    <FontAwesomeIcon icon={icon} />
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                        :
+                            undefined
+                    }
+                    {(typeField === 'select') && list ?
+                        <Form.Control as="select">
+                            {list.map((element) => (<option key={`${element.id}-${element.name}`}>{element.name}</option>))}
+                        </Form.Control>
+                        :
+                        (typeField === 'checkbox') ? 
+                            <Form.Check 
+                                inline
+                                onChange={() => {check ? setCheck(false) : setCheck(true)}}
+                                checked={check} 
+                                label={label} 
+                                id={`${name}-${type}`} 
+                            />
+                            : 
+                            <Form.Control
+                                type="text"
+                                placeholder={placeholder}
+                                aria-describedby="inputGroupPrepend"
+                                required
+                            />}
                     
                     <Form.Control.Feedback type="invalid">
                         {error}
