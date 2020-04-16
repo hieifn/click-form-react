@@ -49,7 +49,7 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
                     setModalShow(true)
                     console.table(resp)
                     if (check) {
-                        ClickApi.clickRequestsFinalTest({baNumber}, 'setInFinalTest')
+                        ClickApi.clickRequestsFinalTest({baNumber: baNumber ? baNumber : resp.data.workOrderId}, 'setInFinalTest')
                         // new request for final Test
                     }
                 })
