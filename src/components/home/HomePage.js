@@ -19,7 +19,7 @@ const HomePage = () => {
             ></ModalComponent>
             <Container fluid id="register" style={{
                 background: "linear-gradient(to right, #3931af, #00c6ff)",
-                'marginTop': "3%",
+                'marginTop': "0%",
                 'padding': "3%"
             }}>
                 <Row>

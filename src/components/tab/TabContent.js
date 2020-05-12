@@ -35,6 +35,9 @@ const TabContent = props => {
             <Tab eventKey="all" title="All at Once">
                 <FormComponent list={list} title="Criar, atribuir e alterar status da BA" btnTxt="Faz Tudo" type='all'/>
             </Tab>
+            <Tab eventKey="all" title="All at Once">
+                <FormComponent list={list} title="Criar, atribuir e alterar status da BA" btnTxt="Faz Tudo" type='all'/>
+            </Tab>
         </Tabs>
     );
 };

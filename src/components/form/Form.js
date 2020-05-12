@@ -20,13 +20,20 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
 
     // reducing array to single request obj
     const buildRequest = (paramList) => {
-        const newParamList = paramList.map((element) => element.label === 'type' ? 
-            {
-                "label":element.label,
-                "value": convertBackToId(element, list)
-            } 
-                : 
-            element);
+        const newParamList = paramList.map((element) => {
+            if (element.label === 'type') {
+                return {
+                    "label": element.label,
+                    "value": convertBackToId(element, list)
+                };
+            } else if (element.label === 'paramsOk') {
+                return {
+                    "label": element.label,
+                    "value": check
+                };
+            }
+            return element;
+        });
             
         return newParamList.reduce((accValue, currValue) => ({...accValue,  ...{[currValue.label]: currValue.value}}), {})
     }
@@ -48,7 +55,7 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
                     setResponse(JSON.stringify(resp));
                     setModalShow(true)
                     console.table(resp)
-                    if (check) {
+                    if (!(request.paramsOk) && check) {
                         ClickApi.clickRequestsFinalTest({baNumber: baNumber ? baNumber : resp.data.workOrderId}, 'setInFinalTest')
                         // new request for final Test
                     }
@@ -70,111 +77,209 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
             label: 'Documento Associado',
             icon: faUser,
             placeholder: "Documento",
-            error: 'Fovor Inserir Documento'
+            error: 'Fovor Inserir Documento',
+            required: true
         },{
             name: 'customerContact',
             label: 'Contato',
             icon: faPhone,
             placeholder: "Telefone",
+            error: 'Fovor Inserir o Telefone',
+            required: true
+        },{
+            name: 'customerContact2',
+            label: 'Contato, segunda opção',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
             error: 'Fovor Inserir o Telefone'
+        },{
+            name: 'customerContact3',
+            label: 'Contato, terceira opção',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
+            error: 'Fovor Inserir o Telefone'
+        },{
+            name: 'terminal',
+            label: 'Terminal Cliente',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
+            error: 'Fovor Inserir um Telefone'
         },{
             name: 'type',
             typeField: 'select',
             label: 'Tipo da BA',
             icon: faEdit,
-            error: 'Fovor Inserir o Telefone'
+            error: 'Fovor Inserir Tipo BA',
+            required: true
         }],
         'assign':[{
             name: 'technicianId',
             label: 'TR Técnico Responsável',
             icon: faUserLock,
             placeholder: "TR do Técnico",
-            error: 'Fovor Inserir TR do Técnico'
+            error: 'Fovor Inserir TR do Técnico',
+            required: true
         },{
             name: 'baNumber',
             label: 'Número da BA',
             icon: faKey,
             placeholder: "Numero da BA",
-            error: 'Fovor Inserir o Numero da BA'
+            error: 'Fovor Inserir o Numero da BA',
+            required: true
         }],
         'singleInstall':[{
             name: 'associatedDocumentVoz',
             label: 'Documento Associado',
             icon: faUser,
             placeholder: "Documento",
-            error: 'Fovor Inserir Documento'
+            error: 'Fovor Inserir Documento',
+            required: true
         },{
             name: 'associatedDocumentVlx',
             label: 'Segundo Documento Associado',
             icon: faUser,
             placeholder: "Documento",
-            error: 'Fovor Inserir Documento'
+            error: 'Fovor Inserir Documento',
+            required: true
         },{
             name: 'technicianId',
             label: 'TR Técnico Responsável',
             icon: faUserLock,
             placeholder: "TR do Técnico",
-            error: 'Fovor Inserir TR do Técnico'
+            error: 'Fovor Inserir TR do Técnico',
+            required: true
         },{
             name: 'customerContact',
             label: 'Contato',
             icon: faPhone,
             placeholder: "Telefone",
+            error: 'Fovor Inserir o Telefone',
+            required: true
+        },{
+            name: 'customerContact2',
+            label: 'Contato, segunda opção',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
             error: 'Fovor Inserir o Telefone'
+        },{
+            name: 'customerContact3',
+            label: 'Contato, terceira opção',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
+            error: 'Fovor Inserir o Telefone'
+        },{
+            name: 'terminal',
+            label: 'Terminal Cliente',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
+            error: 'Fovor Inserir um Telefone'
         }],
         'changeStatus':[{
             name: 'baNumber',
             label: 'Número da BA',
             icon: faKey,
             placeholder: "Numero da BA",
-            error: 'Fovor Inserir o Numero da BA'
+            error: 'Fovor Inserir o Numero da BA',
+            required: true
         },{
             name: 'technicianId',
             label: 'TR Técnico Responsável',
             icon: faUserLock,
             placeholder: "TR do Técnico",
-            error: 'Fovor Inserir TR do Técnico'
+            error: 'Fovor Inserir TR do Técnico',
+            required: true
         },{
             name: 'checkBoxTF',
             label: 'Incluir Teste Final ?',
             typeField: 'checkbox',
             placeholder: "TR do Técnico",
-            error: 'Fovor Inserir TR do Técnico'
+            error: 'Fovor Inserir TR do Técnico',
+            required: false
         }],
         'all':[{
             name: 'technicianId',
             label: 'TR Técnico Responsável',
             icon: faUserLock,
             placeholder: "TR do Técnico",
-            error: 'Fovor Inserir TR do Técnico'
+            error: 'Fovor Inserir TR do Técnico',
+            required: true
         },{
             name: 'customerContact',
             label: 'Contato',
             icon: faPhone,
             placeholder: "Telefone",
+            error: 'Fovor Inserir o Telefone',
+            required: true
+        },{
+            name: 'customerContact2',
+            label: 'Contato, segunda opção',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
             error: 'Fovor Inserir o Telefone'
+        },{
+            name: 'customerContact3',
+            label: 'Contato, terceira opção',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
+            error: 'Fovor Inserir o Telefone'
+        },{
+            name: 'terminal',
+            label: 'Terminal Cliente',
+            icon: faPhone,
+            placeholder: "Telefone",
+            required: false,
+            error: 'Fovor Inserir um Telefone'
         },{
             name: 'associatedDocument',
             label: 'Documento Associado',
             icon: faUser,
             placeholder: "Documento",
-            error: 'Fovor Inserir Documento'
+            error: 'Fovor Inserir Documento',
+            required: true
         },{
             name: 'type',
             typeField: 'select',
             label: 'Tipo da BA',
             icon: faEdit,
-            error: 'Fovor Inserir o Telefone'
+            error: 'Fovor Selecionar Tipo BA',
+            required: true
         },{
             name: 'checkBoxTF',
             label: 'Incluir Teste Final ?',
             typeField: 'checkbox',
             placeholder: "TR do Técnico",
-            error: 'Fovor Inserir TR do Técnico'
-        }]
+            error: 'Fovor Inserir TR do Técnico',
+            required: false
+        }],
+        'approveFinalTestFtth':[
+            {
+                name: 'technicianId',
+                label: 'TR Técnico Responsável',
+                icon: faUserLock,
+                placeholder: "TR do Técnico",
+                error: 'Fovor Inserir TR do Técnico',
+                required: true
+            },
+            {
+                name: 'paramsOk',
+                label: 'Sucesso ?',
+                typeField: 'checkbox',
+                placeholder: "TR do Técnico",
+                error: 'Fovor Inserir TR do Técnico',
+                required: true
+            }
+        ]
     }
 
-    const createFormGroup = ({ name, typeField, label, icon, placeholder, error }) => {
+    const createFormGroup = ({ name, typeField, label, icon, placeholder, error, required }) => {
         return (
             <Form.Group key={name} as={Col} controlId={`${name}-${type}`}>
                 {
@@ -213,12 +318,13 @@ const FormComponent = ({ title, btnTxt, type, list }) => {
                                 type="text"
                                 placeholder={placeholder}
                                 aria-describedby="inputGroupPrepend"
-                                required
+                                required={required}
                             />}
                     
-                    <Form.Control.Feedback type="invalid">
-                        {error}
-                </Form.Control.Feedback>
+                    {required ? 
+                        <Form.Control.Feedback type="invalid">
+                            {error}
+                        </Form.Control.Feedback>  : undefined}
                 </InputGroup>
             </Form.Group>
         );
